@@ -97,3 +97,10 @@ body {
 .weather {
   display: none;
 }
+
+.error {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 14px;
+  display: none;
+}
