@@ -27,12 +27,43 @@
           <div class="col">
             <img src="./images/wind.png" alt="" />
             <div>
-              <p class="humidity">15 km/h</p>
+              <p class="wind">15 km/h</p>
               <p>Wind Speed</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
+    <script>
+      const apiKey = "b4a64c2e3be970a452d15de50978ddd2";
+      const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+      const searchBox = document.querySelector(".search input");
+      const searchBtn = document.querySelector(".search button");
+      const weatherIcon = document.querySelector(".weather-icon");
+
+      // https://api.openweathermap.org/data/2.5/weather?q=germany&appid=b4a64c2e3be970a452d15de50978ddd2&units=metric
+      // https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+      async function getWeather(city) {
+        const response = await fetch(apiUrl +  city + "&appid=" + apiKey);
+        const data = await response.json();
+        console.log(data);
+        document.querySelector(".city").innerText = data.name;
+        document.querySelector(".temp").innerText = Math.round(data.main.temp) + "°C";
+        document.querySelector(".humidity").innerText = data.main.humidity + "%";
+        document.querySelector(".wind").innerText = Math.round(data.wind.speed) + " km/h";
+      }
+
+      searchBtn.addEventListener("click", () => {
+        getWeather(searchBox.value);
+      })
+
+
+      // const cityInput = document.querySelector(".search input");
+      // const searchBtn = document.querySelector(".search button");
+      // const weatherIcon = document.querySelector(".weather-icon");
+    </script>
   </body>
 </html>
